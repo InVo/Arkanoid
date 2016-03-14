@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
     public BallController Ball;
     public float BallStartPosition;
     public Vector2 BallStartVelocity;
+    public float Speed;
     private Rigidbody _rigidbody;
 
     private const float BALL_START_POSITION = 0.3f;
@@ -14,6 +15,8 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody _ballRigidbody;
 
     private bool _ballLaunched = false;
+
+    private const float PLAYER_X_LIMIT = 7.334f;
 
     // Use this for initialization
     void Start () {
@@ -27,14 +30,8 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float hinput = Input.GetAxis("Horizontal");
-        if (hinput != 0)
-        {
-            _rigidbody.AddForce(hinput, 0, 0);
-        }
-        if (!_ballLaunched)
-        {
-            SetBallPosition();
-        }
+        float playerPosX = transform.position.x + hinput * Speed * Time.deltaTime;
+        transform.position = new Vector3 (Mathf.Clamp(playerPosX, -PLAYER_X_LIMIT, PLAYER_X_LIMIT), transform.position.y);
         if (!_ballLaunched && Input.GetButton("Fire1"))
         {
             LaunchBall();
@@ -54,6 +51,6 @@ public class PlayerController : MonoBehaviour {
     void LaunchBall()
     {
         _ballLaunched = true;
-        Ball.SetVelocity(BallStartVelocity);
+        Ball.Launch(BallStartVelocity);
     }
 }

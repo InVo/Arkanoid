@@ -17,7 +17,7 @@ public class BallController : MonoBehaviour {
 	
 	}
 
-    public void OnCollisionEnter(Collision collision)
+/*    public void OnCollisionEnter(Collision collision)
     {
         
         if (collision.gameObject.CompareTag("Player"))
@@ -27,7 +27,7 @@ public class BallController : MonoBehaviour {
         {
             EnvironmentCollision(collision);
         }
-    }
+    }*/
 
     public void SetVelocity(Vector2 velocity)
     {
@@ -56,5 +56,12 @@ public class BallController : MonoBehaviour {
         Vector3 projVector = projection / collisionNormal.magnitude * collisionNormal;
         _currentVelocity = _currentVelocity - 2 * projVector;
         _rigidbody.velocity = _currentVelocity;
+    }
+
+    public void Launch(Vector2 launchVelocity)
+    {
+        transform.parent = null;
+        _rigidbody.isKinematic = false;
+        SetVelocity(launchVelocity);
     }
 }

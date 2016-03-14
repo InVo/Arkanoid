@@ -20,9 +20,4 @@ public class WallController : MonoBehaviour {
 	void Update () {
 	
 	}
-
-    void OnCollisionEnter(Collision collision)
-    {
-        int c = 0;
-    }
 }

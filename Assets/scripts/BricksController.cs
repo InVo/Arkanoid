@@ -17,11 +17,11 @@ public class BricksController : MonoBehaviour {
 
     void Awake()
     {
-
+//        InitBricks();
     }
     // Use this for initialization
     void Start () {
-        InitBricks();
+        
 	}
 
     public void InitBricks()
